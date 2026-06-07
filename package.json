@@ -1,0 +1,11 @@
+{
+  "name": "deepguard-ai-detection-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "netlify deploy --prod --dir outputs"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.38.1"
+  }
+}
