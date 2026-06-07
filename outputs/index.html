@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepGuard AI Detection Platform</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">DG</span>
+        <div>
+          <strong>DeepGuard</strong>
+          <small>AI Forensics</small>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="upload">Upload Media</button>
+        <button class="nav-item" data-view="analysis">AI Analysis</button>
+        <button class="nav-item" data-view="results">Results</button>
+        <button class="nav-item" data-view="explain">Explainable AI</button>
+        <button class="nav-item" data-view="reports">Reports</button>
+        <button class="nav-item" data-view="history">History</button>
+        <button class="nav-item" data-view="settings">Settings</button>
+      </nav>
+      <div class="system-card">
+        <span class="pulse"></span>
+        <div>
+          <strong>Detection Grid Online</strong>
+          <small>7 models synchronized</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Enterprise AI media integrity</p>
+          <h1 id="page-title">Command Center</h1>
+        </div>
+        <div class="top-actions">
+          <label class="search">
+            <span>Search</span>
+            <input type="search" placeholder="Case ID, file, analyst..." />
+          </label>
+          <button class="icon-btn" title="Notifications">!</button>
+          <button class="primary-btn" data-view-jump="upload">New Analysis</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboard">
+        <div class="metric-grid">
+          <article class="metric">
+            <small>Total Analyses</small>
+            <strong>2,847</strong>
+            <span class="good">+18.4% this month</span>
+          </article>
+          <article class="metric">
+            <small>Fake Detected</small>
+            <strong>1,124</strong>
+            <span class="danger">39.5% risk rate</span>
+          </article>
+          <article class="metric">
+            <small>Real Verified</small>
+            <strong>1,723</strong>
+            <span class="good">96.8% confidence</span>
+          </article>
+          <article class="metric">
+            <small>Queue Latency</small>
+            <strong>42s</strong>
+            <span class="warn">peak load</span>
+          </article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel wide">
+            <div class="panel-head">
+              <h2>Threat Trend</h2>
+              <span>Last 14 days</span>
+            </div>
+            <div class="chart bars" aria-label="Threat trend chart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <h2>Model Consensus</h2>
+              <span>Live</span>
+            </div>
+            <div class="donut"><span>94%</span></div>
+            <p class="muted">Ensemble agreement across face, motion, compression, and diffusion artifact models.</p>
+          </article>
+          <article class="panel wide">
+            <div class="panel-head">
+              <h2>Recent Activity</h2>
+              <button class="text-btn" data-view-jump="history">View all</button>
+            </div>
+            <div class="activity-list"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <h2>Risk Distribution</h2>
+              <span>Today</span>
+            </div>
+            <div class="risk-stack">
+              <span style="--w:46%" class="risk high">High</span>
+              <span style="--w:32%" class="risk medium">Medium</span>
+              <span style="--w:22%" class="risk low">Low</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="upload">
+        <div class="workspace-grid">
+          <article class="dropzone" id="dropzone">
+            <div class="upload-orb">+</div>
+            <h2>Drop media for forensic analysis</h2>
+            <p>JPG, PNG, MP4, MOV up to 2 GB. Files are isolated, hashed, and processed through the DeepGuard detection ensemble.</p>
+            <input id="fileInput" type="file" hidden accept="image/*,video/*" />
+            <button class="primary-btn" id="selectFile">Select File</button>
+            <div id="fileStatus" class="file-status">No file selected</div>
+          </article>
+          <aside class="panel">
+            <h2>Validation Rules</h2>
+            <ul class="check-list">
+              <li>Cryptographic hash generated</li>
+              <li>Metadata extracted and normalized</li>
+              <li>Frame sampling optimized by media type</li>
+              <li>Chain-of-custody report prepared</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="analysis">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Pipeline Execution</h2>
+            <span id="pipelineStatus">Processing</span>
+          </div>
+          <div class="pipeline"></div>
+        </article>
+      </section>
+
+      <section class="view" id="results">
+        <div class="results-grid">
+          <article class="verdict">
+            <small>Final Verdict</small>
+            <strong>Likely AI-Generated</strong>
+            <span>Confidence 97.2%</span>
+          </article>
+          <article class="panel">
+            <h2>Evidence Findings</h2>
+            <div class="finding"><b>Facial boundary artifacts</b><span>Severe</span></div>
+            <div class="finding"><b>Audio-visual mismatch</b><span>High</span></div>
+            <div class="finding"><b>Compression inconsistency</b><span>Medium</span></div>
+          </article>
+          <article class="panel wide">
+            <h2>Signal Breakdown</h2>
+            <div class="signal-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="explain">
+        <div class="explain-grid">
+          <article class="media-frame">
+            <div class="face-map">
+              <span class="heat h1"></span>
+              <span class="heat h2"></span>
+              <span class="heat h3"></span>
+            </div>
+          </article>
+          <article class="panel">
+            <h2>Explainable AI Notes</h2>
+            <p class="muted">The strongest activations appear around the left eye contour, jaw boundary, and mouth transition frames. These regions are consistent with face-swap blending artifacts.</p>
+            <div class="attention-row"><span>Eye region</span><b>98%</b></div>
+            <div class="attention-row"><span>Jawline</span><b>91%</b></div>
+            <div class="attention-row"><span>Lip sync</span><b>87%</b></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="reports">
+        <article class="panel report">
+          <div>
+            <p class="eyebrow">Case DG-2847</p>
+            <h2>Forensic Integrity Report</h2>
+            <p class="muted">Includes executive summary, model scores, media hashes, heatmap references, analyst notes, and chain-of-custody events.</p>
+          </div>
+          <button class="primary-btn">Generate PDF</button>
+        </article>
+        <div class="report-grid">
+          <article class="panel"><h2>Summary</h2><p class="muted">High confidence synthetic media detection with multiple independent evidence families.</p></article>
+          <article class="panel"><h2>Exports</h2><p class="muted">PDF, JSON, CSV, STIX/TAXII compatible intelligence bundle.</p></article>
+          <article class="panel"><h2>Review</h2><p class="muted">Awaiting senior analyst sign-off before external disclosure.</p></article>
+        </div>
+      </section>
+
+      <section class="view" id="history">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Analysis History</h2>
+            <input class="table-filter" id="historyFilter" placeholder="Filter history..." />
+          </div>
+          <table>
+            <thead><tr><th>Case</th><th>File</th><th>Verdict</th><th>Confidence</th><th>Status</th></tr></thead>
+            <tbody id="historyRows"></tbody>
+          </table>
+        </article>
+      </section>
+
+      <section class="view" id="settings">
+        <div class="settings-grid">
+          <article class="panel">
+            <h2>Model Policy</h2>
+            <label class="toggle"><input type="checkbox" checked /> Ensemble consensus required</label>
+            <label class="toggle"><input type="checkbox" checked /> Auto-generate explainability maps</label>
+            <label class="toggle"><input type="checkbox" /> Quarantine high-risk media</label>
+          </article>
+          <article class="panel">
+            <h2>Notifications</h2>
+            <label class="toggle"><input type="checkbox" checked /> Critical verdict alerts</label>
+            <label class="toggle"><input type="checkbox" checked /> Weekly intelligence digest</label>
+            <label class="toggle"><input type="checkbox" /> Slack incident bridge</label>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
