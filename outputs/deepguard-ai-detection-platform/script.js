@@ -1,0 +1,18 @@
+const views={dashboard:"Command Center",upload:"Upload Media",analysis:"AI Analysis",results:"Results Dashboard",explain:"Explainable AI",reports:"Reports",history:"Analysis History",settings:"Settings"};
+const activities=[["DG-2847","interview_clip.mp4","Likely fake","97.2%"],["DG-2846","press_photo.png","Verified real","98.6%"],["DG-2845","voiceover_reel.mov","Needs review","78.4%"],["DG-2844","profile_image.jpg","Likely fake","93.1%"]];
+const pipeline=["File Validation","Face Detection","Frame Extraction","Feature Analysis","Deepfake Detection","Explainability","Report Creation"];
+const signals=[["Facial texture anomaly",97],["Temporal landmark drift",91],["Mouth-shape mismatch",87],["Metadata provenance risk",74]];
+function switchView(id){document.querySelectorAll(".view").forEach(view=>view.classList.toggle("active",view.id===id));document.querySelectorAll(".nav-item").forEach(item=>item.classList.toggle("active",item.dataset.view===id));document.querySelector("#page-title").textContent=views[id]}
+document.querySelectorAll("[data-view], [data-view-jump]").forEach(control=>{control.addEventListener("click",()=>switchView(control.dataset.view||control.dataset.viewJump))});
+document.querySelector(".bars").innerHTML=[44,58,51,72,65,88,76,91,64,70,83,92,87,96].map(value=>`<span class="bar" style="height:${value}%"></span>`).join("");
+document.querySelector(".activity-list").innerHTML=activities.map(([id,file,verdict,confidence])=>`<div class="activity"><b>${id}</b><span>${file}</span><span>${verdict}</span><strong>${confidence}</strong></div>`).join("");
+document.querySelector(".pipeline").innerHTML=pipeline.map((name,index)=>`<div class="stage ${index<4?"done":index===4?"active":""}"><b>${name}</b><div class="progress"><span style="width:${index<4?100:index===4?62:0}%"></span></div></div>`).join("");
+document.querySelector(".signal-list").innerHTML=signals.map(([name,value])=>`<div class="signal"><b>${name}</b><div class="signal-meter"><span style="width:${value}%"></span></div><strong>${value}%</strong></div>`).join("");
+function renderHistory(filter=""){const rows=[["DG-2847","interview_clip.mp4","Likely fake","97.2%","Escalated"],["DG-2846","press_photo.png","Verified real","98.6%","Closed"],["DG-2845","voiceover_reel.mov","Needs review","78.4%","Review"],["DG-2844","profile_image.jpg","Likely fake","93.1%","Reported"],["DG-2843","board_meeting.mov","Verified real","95.0%","Closed"],["DG-2842","evidence_frame.png","Likely fake","89.7%","Escalated"]];const normalized=filter.toLowerCase();document.querySelector("#historyRows").innerHTML=rows.filter(row=>row.join(" ").toLowerCase().includes(normalized)).map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join("")}</tr>`).join("")}
+renderHistory();
+document.querySelector("#historyFilter").addEventListener("input",event=>renderHistory(event.target.value));
+const dropzone=document.querySelector("#dropzone");const fileInput=document.querySelector("#fileInput");const fileStatus=document.querySelector("#fileStatus");
+document.querySelector("#selectFile").addEventListener("click",()=>fileInput.click());
+fileInput.addEventListener("change",()=>{const file=fileInput.files[0];fileStatus.textContent=file?`${file.name} ready for validation`:"No file selected"});
+["dragenter","dragover"].forEach(type=>dropzone.addEventListener(type,event=>{event.preventDefault();dropzone.classList.add("drag")}));
+["dragleave","drop"].forEach(type=>dropzone.addEventListener(type,event=>{event.preventDefault();dropzone.classList.remove("drag");if(event.dataTransfer?.files?.length){fileStatus.textContent=`${event.dataTransfer.files[0].name} ready for validation`}}));
