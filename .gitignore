@@ -1,3 +1,4 @@
 work/
 .netlify/
 node_modules/
+backend/data/
