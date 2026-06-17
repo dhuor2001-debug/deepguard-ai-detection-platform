@@ -1,99 +1,328 @@
-<section class="view" id="upload">
-  <div class="workspace-grid">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepGuard - AI Media Integrity Platform</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">DG</div>
+      <div>
+        <strong>DeepGuard</strong>
+        <small>AI Forensics</small>
+      </div>
+    </div>
 
-    <article class="dropzone" id="dropzone">
+    <div class="nav">
+      <button class="nav-item active" data-view="dashboard">Dashboard</button>
+      <button class="nav-item" data-view="upload">Upload Media</button>
+      <button class="nav-item" data-view="analysis">AI Analysis</button>
+      <button class="nav-item" data-view="results">Results</button>
+      <button class="nav-item" data-view="explain">Explainable AI</button>
+      <button class="nav-item" data-view="reports">Reports</button>
+      <button class="nav-item" data-view="history">History</button>
+      <button class="nav-item" data-view="settings">Settings</button>
+    </div>
 
-      <div class="upload-orb">+</div>
+    <div class="system-card">
+      <div class="pulse"></div>
+      <div>
+        <strong>Detection Grid Online</strong>
+        <small>7 models synchronized</small>
+      </div>
+    </div>
+  </nav>
 
-      <h2>Drop media for forensic analysis</h2>
+  <!-- MAIN CONTENT -->
+  <div class="shell">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">ENTERPRISE AI MEDIA INTEGRITY</div>
+        <h1 id="page-title">Command Center</h1>
+      </div>
+      <div class="top-actions">
+        <div class="search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search Case ID, file, analyst..." />
+        </div>
+        <button class="icon-btn" title="Notifications">ℹ️</button>
+        <button class="primary-btn">New Analysis</button>
+      </div>
+    </div>
 
-      <p>
-        JPG, PNG, MP4, MOV up to 2 GB.
-        Files are isolated, hashed, and processed
-        through the DeepGuard detection ensemble.
-      </p>
-
-      <input
-        id="fileInput"
-        type="file"
-        hidden
-        accept="image/*,video/*"
-      />
-
-      <button class="primary-btn" id="selectFile">
-        Select File
-      </button>
-
-      <div id="fileStatus" class="file-status">
-        No file selected
+    <!-- DASHBOARD VIEW -->
+    <section class="view active" id="dashboard">
+      <div class="metric-grid">
+        <div class="metric">
+          <small>Total Analyses</small>
+          <strong>2,847</strong>
+          <small class="good">+18.4% this month</small>
+        </div>
+        <div class="metric">
+          <small>Fake Detected</small>
+          <strong>1,124</strong>
+          <small class="danger">39.5% risk rate</small>
+        </div>
+        <div class="metric">
+          <small>Real Verified</small>
+          <strong>1,723</strong>
+          <small class="good">96.8% confidence</small>
+        </div>
+        <div class="metric">
+          <small>Queue Latency</small>
+          <strong>42s</strong>
+          <small class="warn">peak load</small>
+        </div>
       </div>
 
-      <!-- IMAGE PREVIEW -->
+      <div class="dashboard-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Threat Trend</h2>
+            <span>Last 14 days</span>
+          </div>
+          <div class="bars"></div>
+        </div>
 
-      <div style="margin-top:20px;">
-
-        <img
-          id="previewImage"
-          src=""
-          alt="Preview"
-          style="
-            display:none;
-            max-width:100%;
-            max-height:300px;
-            border-radius:12px;
-          "
-        />
-
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Model Consensus</h2>
+            <span>Live</span>
+          </div>
+          <div class="donut"><span>94%</span></div>
+          <small style="color: var(--muted); text-align: center; display: block; margin-top: 12px;">
+            Ensemble agreement across face, motion, compression, and diffusion artifact
+            models.
+          </small>
+        </div>
       </div>
 
-      <!-- MODEL OUTPUT -->
-
-      <div
-        id="predictionCard"
-        style="
-          margin-top:20px;
-          padding:20px;
-          border-radius:12px;
-          background:#111827;
-        "
-      >
-
-        <h3>AI Analysis Result</h3>
-
-        <h1
-          id="prediction"
-          style="
-            color:#38bdf8;
-            margin-top:10px;
-          "
-        >
-          Waiting...
-        </h1>
-
-        <h3 style="margin-top:20px;">
-          Confidence
-        </h3>
-
-        <h2 id="confidence">
-          0%
-        </h2>
-
+      <div class="panel" style="margin-top: 16px;">
+        <div class="panel-head">
+          <h2>Recent Activity</h2>
+          <a href="#" class="text-btn">View all</a>
+        </div>
+        <div class="activity-list"></div>
       </div>
 
-    </article>
+      <div class="panel" style="margin-top: 16px;">
+        <div class="panel-head">
+          <h2>Risk Distribution</h2>
+          <span>Today</span>
+        </div>
+        <div class="risk-stack">
+          <div class="risk high" style="--w: 156px;">High</div>
+          <div class="risk medium" style="--w: 124px;">Medium</div>
+          <div class="risk low" style="--w: 98px;">Low</div>
+        </div>
+      </div>
+    </section>
 
-    <aside class="panel">
+    <!-- UPLOAD VIEW -->
+    <section class="view" id="upload">
+      <div class="workspace-grid">
+        <article class="dropzone" id="dropzone">
+          <div class="upload-orb">+</div>
+          <h2>Drop media for forensic analysis</h2>
+          <p>
+            JPG, PNG, MP4, MOV up to 2 GB. Files are isolated, hashed, and processed
+            through the DeepGuard detection ensemble.
+          </p>
+          <input id="fileInput" type="file" hidden accept="image/*,video/*" />
+          <button class="primary-btn" id="selectFile">Select File</button>
+          <div id="fileStatus" class="file-status">No file selected</div>
 
-      <h2>Validation Rules</h2>
+          <div style="margin-top: 20px;">
+            <img
+              id="previewImage"
+              src=""
+              alt="Preview"
+              style="display: none; max-width: 100%; max-height: 300px; border-radius: 12px;"
+            />
+          </div>
 
-      <ul class="check-list">
-        <li>Cryptographic hash generated</li>
-        <li>Metadata extracted and normalized</li>
-        <li>Frame sampling optimized by media type</li>
-        <li>Chain-of-custody report prepared</li>
-      </ul>
+          <div
+            id="predictionCard"
+            style="margin-top: 20px; padding: 20px; border-radius: 12px; background: #111827; display: none;"
+          >
+            <h3>AI Analysis Result</h3>
+            <h1 id="prediction" style="color: #38bdf8; margin-top: 10px;">Waiting...</h1>
+            <h3 style="margin-top: 20px;">Confidence</h3>
+            <h2 id="confidence">0%</h2>
+          </div>
+        </article>
 
-    </aside>
+        <aside class="panel">
+          <h2>Validation Rules</h2>
+          <ul class="check-list">
+            <li>Cryptographic hash generated</li>
+            <li>Metadata extracted and normalized</li>
+            <li>Frame sampling optimized by media type</li>
+            <li>Chain-of-custody report prepared</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
+    <!-- AI ANALYSIS VIEW -->
+    <section class="view" id="analysis">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Pipeline Execution</h2>
+          <span>Processing</span>
+        </div>
+        <div class="pipeline"></div>
+      </div>
+    </section>
+
+    <!-- RESULTS VIEW -->
+    <section class="view" id="results">
+      <div class="results-grid">
+        <div class="panel">
+          <div class="verdict">
+            <div class="panel-head" style="justify-content: flex-start; gap: 12px; margin-bottom: 12px;">
+              <div style="color: var(--muted); font-size: 12px;">Final Verdict</div>
+            </div>
+            <strong>Likely AI-Generated</strong>
+            <b style="color: var(--cyan); font-size: 18px; margin-top: 8px;">Confidence 97.2%</b>
+          </div>
+
+          <div class="panel" style="margin-top: 16px;">
+            <div class="panel-head">
+              <h2>Signal Breakdown</h2>
+            </div>
+            <div class="signal-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Evidence Findings</h2>
+          </div>
+          <div class="finding" style="border: 0; background: transparent; padding: 0; margin-bottom: 12px;">
+            <b>Facial boundary artifacts</b>
+            <span>Severe</span>
+          </div>
+          <div class="finding" style="border: 0; background: transparent; padding: 0; margin-bottom: 12px;">
+            <b>Audio-visual mismatch</b>
+            <span>High</span>
+          </div>
+          <div class="finding" style="border: 0; background: transparent; padding: 0;">
+            <b>Compression inconsistency</b>
+            <span>Medium</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLAINABLE AI VIEW -->
+    <section class="view" id="explain">
+      <div class="explain-grid">
+        <div class="media-frame">
+          <div class="face-map">
+            <div class="heat h1"></div>
+            <div class="heat h2"></div>
+            <div class="heat h3"></div>
+          </div>
+        </div>
+        <aside class="panel">
+          <h2>Model Interpretability</h2>
+          <div style="color: var(--muted); line-height: 1.8; font-size: 14px;">
+            <p><b>Face Detector:</b> 94% confidence in face location and boundary.</p>
+            <p><b>Artifact Analyzer:</b> Detected 7 compression anomalies.</p>
+            <p><b>Motion Tracker:</b> Temporal drift exceeds natural threshold by 18%.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- REPORTS VIEW -->
+    <section class="view" id="reports">
+      <div class="report-grid">
+        <div class="panel">
+          <h2>Chain of Custody</h2>
+          <p style="color: var(--muted); font-size: 14px;">
+            File: evidence_001.mp4<br />
+            Hash: a3f9e2c... <br />
+            Uploaded: 2 hours ago
+          </p>
+        </div>
+        <div class="panel">
+          <h2>Forensic Analysis</h2>
+          <p style="color: var(--muted); font-size: 14px;">
+            10 detection signals analyzed<br />
+            7 anomalies found<br />
+            Risk level: High
+          </p>
+        </div>
+        <div class="panel">
+          <h2>Threat Assessment</h2>
+          <p style="color: var(--muted); font-size: 14px;">
+            Recommendation: Escalate<br />
+            Confidence: 97.2%<br />
+            Status: Reported
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY VIEW -->
+    <section class="view" id="history">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Analysis History</h2>
+          <input class="table-filter" id="historyFilter" type="text" placeholder="Search..." />
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>File</th>
+              <th>Verdict</th>
+              <th>Confidence</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="historyRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SETTINGS VIEW -->
+    <section class="view" id="settings">
+      <div class="settings-grid">
+        <div class="panel">
+          <h2>Platform Settings</h2>
+          <div class="toggle">
+            <span>Model Detection Threshold</span>
+            <strong>85%</strong>
+          </div>
+          <div class="toggle">
+            <span>Auto-Report on High Risk</span>
+            <strong>Enabled</strong>
+          </div>
+          <div class="toggle">
+            <span>Archive Old Cases</span>
+            <strong>30 days</strong>
+          </div>
+        </div>
+        <aside class="panel">
+          <h2>System Status</h2>
+          <p style="color: var(--green); font-weight: 800;">✓ All systems operational</p>
+          <p style="color: var(--muted); font-size: 13px; margin-top: 12px;">
+            Last sync: 2 minutes ago<br />
+            Models: 7 active<br />
+            Queue: 23 pending
+          </p>
+        </aside>
+      </div>
+    </section>
   </div>
-</section>
+
+  <script src="script.js"></script>
+</body>
+</html>
